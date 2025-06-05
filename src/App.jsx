@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
@@ -8,7 +10,7 @@ function App() {
   const [email, setEmail] = useState("");
   const [userEdit, setUserEdit] = useState("");
 
-  const API_URL = "http://localhost:8000/person";
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     getAllData();
@@ -26,7 +28,7 @@ function App() {
     if (!name || !email) {
       return;
     }
-    // eslint-disable-next-line no-unused-vars
+
     const response = await axios.post(API_URL, { name, email });
     setName("");
     setEmail("");
@@ -39,7 +41,7 @@ function App() {
     if (!confirmDelete) {
       return;
     }
-    // eslint-disable-next-line no-unused-vars
+
     const response = await axios.delete(`${API_URL}/${id}`);
     getAllData();
   }
@@ -55,7 +57,7 @@ function App() {
   //update data
   async function updateData(e) {
     e.preventDefault();
-    // eslint-disable-next-line no-unused-vars
+
     const response = await axios.put(`${API_URL}/${userEdit}`, { name, email });
     setName("");
     setEmail("");
@@ -63,18 +65,18 @@ function App() {
     getAllData();
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     if (userEdit) {
-      updateData(e);
+      await updateData(e);
     } else {
-      addData(e);
+      await addData(e);
     }
   }
 
   return (
     <div className="wrapper">
       <div className="header">
-        <h3>Tambah Pengguna</h3>
+        <h3>{userEdit ? "Edit Pengguna" : "Tambah Pengguna"}</h3>
         <form className="input-box" type="submit" onSubmit={handleSubmit}>
           <input
             type="text"
@@ -88,7 +90,9 @@ function App() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <button type="submit">Simpan</button>
+          <button type="submit">
+            {userEdit ? "Update Pengguna" : "Tambah Pengguna"}
+          </button>
         </form>
       </div>
       <div className="data-pengguna">
