@@ -97,29 +97,35 @@ function App() {
       </div>
       <div className="data-pengguna">
         <h3>Data Pengguna</h3>
-        <ul>
-          {users.map((user) => (
-            <li>
-              <div>
-                {user.name} <span className="email">({user.email})</span>
-              </div>
-              <div>
-                <a href="#" onClick={() => editData(user.id)} className="edit">
-                  Edit
-                </a>{" "}
-                -{" "}
-                <a
-                  href="#"
-                  onClick={() => deleteData(user.id)}
-                  type="submit"
-                  className="delete"
-                >
-                  Delete
-                </a>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <table className="w-full border border-gray-300">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="px-4 py-2 ">No</th>
+              <th className="px-4 py-2">Nama</th>
+              <th className="px-4 py-2">Email</th>
+              <th className="px-4 py-2">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user, index) => (
+              <tr key={user.id}>
+                <td className="px-4 py-3 text-center">{index + 1}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>
+                  <div className="flex gap-2 justify-center items-center">
+                    <a href="#" onClick={() => editData(user.id)}>
+                      <i className="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <a href="#" onClick={() => deleteData(user.id)}>
+                      <i className="fa-solid fa-trash"></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

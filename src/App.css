@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 body,
 html {
   background-color: #ccc;
@@ -13,7 +15,7 @@ html {
   margin-top: 20px;
 }
 .header {
-  background-color: #3f72af;
+  background-color: #fc9825;
   padding: 20px;
   border-radius: 10px 10px 0px 0px;
 }
@@ -26,10 +28,12 @@ html {
   color: white;
   margin: 0px 0px 20px;
   font-size: 30px;
+  text-align: center;
 }
 .data-pengguna h3 {
   margin: 0px 0px 20px;
   font-size: 30px;
+  text-align: center;
 }
 @media only screen and (max-width: 800px) {
   .wrapper {
@@ -56,7 +60,7 @@ html {
 }
 .input-box > button {
   border: 0;
-  background: #112d4e;
+  background: #7d2e00;
   color: #fff;
   font-weight: bold;
   outline: none;
