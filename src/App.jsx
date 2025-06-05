@@ -6,6 +6,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [userEdit, setUserEdit] = useState("");
 
   const API_URL = "http://localhost:8000/person";
 
@@ -43,13 +44,33 @@ function App() {
     const response = await axios.get(`${API_URL}/${id}`);
     setName(response.data.name);
     setEmail(response.data.email);
+    setUserEdit(id);
+  }
+
+  //update data
+  async function updateData(e) {
+    e.preventDefault();
+    // eslint-disable-next-line no-unused-vars
+    const response = await axios.put(`${API_URL}/${userEdit}`, { name, email });
+    setName("");
+    setEmail("");
+    setUserEdit("");
+    getAllData();
+  }
+
+  function handleSubmit(e) {
+    if (userEdit) {
+      updateData(e);
+    } else {
+      addData(e);
+    }
   }
 
   return (
     <div className="wrapper">
       <div className="header">
         <h3>Tambah Pengguna</h3>
-        <form className="input-box" type="submit" onSubmit={addData}>
+        <form className="input-box" type="submit" onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Nama"
