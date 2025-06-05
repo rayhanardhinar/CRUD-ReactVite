@@ -35,6 +35,11 @@ function App() {
 
   //delete data
   async function deleteData(id) {
+    const confirmDelete = window.confirm("Apakah anda yakin ingin mengahapus?");
+    if (!confirmDelete) {
+      return;
+    }
+    // eslint-disable-next-line no-unused-vars
     const response = await axios.delete(`${API_URL}/${id}`);
     getAllData();
   }
